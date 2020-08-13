@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="./external/jquery/jquery.js"></script>
+    <script src="./jquery-validation-1.16.0/dist/jquery.validate.js"></script>
+    <link rel="stylesheet" href="styles.css" />
+    <title>Prodavnica knjiga</title>
+  </head>
+  <body onload="vratiKnjigu()">
+    <nav>
+      <div><a id="IzbornikDugme">☰</a><span>Prodavnica Knjiga</span></div>
+      <div id="Izbornik" style="clear: both;">
+        <a class="IzbornikStavka" href="Pocetna.html">Pocetna</a>
+        <a class="IzbornikStavka" href="Kosarica.html">Kosarica</a>
+      </div>
+    </nav>
+    <div id="Knjiga"></div>
+    <script src="script.js"></script>
+  </body>
+</html>

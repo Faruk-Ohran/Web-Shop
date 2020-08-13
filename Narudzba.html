@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="./external/jquery/jquery.js"></script>
+    <script src="./jquery-validation-1.16.0/dist/jquery.validate.js"></script>
+    <link rel="stylesheet" href="styles.css" />
+    <title>Prodavnica knjiga</title>
+  </head>
+  <body onload="ucitajKosaricu()">
+    <nav>
+      <div><a id="IzbornikDugme">☰</a><span>Prodavnica Knjiga</span></div>
+      <div id="Izbornik" style="clear: both;">
+        <a class="IzbornikStavka" href="Pocetna.html">Pocetna</a>
+        <a class="IzbornikStavka" href="Kosarica.html">Kosarica</a>
+      </div>
+    </nav>
+    <table
+      id="tabela-narudzba"
+      border="1px"
+      style="width: 100%; table-layout: fixed;"
+    >
+      <thead>
+        <tr class="glavno">
+          <th>Fotografija</th>
+          <th>Naziv</th>
+          <th>Cijena</th>
+          <th>Kolicina</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <form id="forma" onsubmit="return false;">
+      <label for="dostavaIme">Ime i prezime</label>
+      <input
+        id="dostavaIme"
+        name="dostavaIme"
+        placeholder="Ime i Prezime"
+      /><br />
+
+      <label for="dostavaAdresa">Adresa</label>
+      <input
+        id="dostavaAdresa"
+        name="dostavaAdresa"
+        placeholder="Adresa"
+      /><br />
+
+      <label for="dostavaTelefon">Broj telefona</label>
+      <input
+        id="dostavaTelefon"
+        name="dostavaTelefon"
+        placeholder="000 111 222"
+      /><br />
+
+      <label for="dostavaMail">Mail</label>
+      <input
+        id="dostavaMail"
+        name="dostavaMail"
+        placeholder="email.email@hotmail.com"
+      /><br />
+
+      <input type="submit" onclick="naruci()" id="dodaj" value="Naruči" />
+    </form>
+    <script src="script.js"></script>
+  </body>
+</html>
