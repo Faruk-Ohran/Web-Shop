@@ -59,10 +59,12 @@ function ucitajKnjige() {
   document.getElementById("wrapper").innerHTML = knjige
     .map(
       (knjiga) =>
-        `<a href="Proizvod.html" onclick="setID(${knjiga.id})"><div class="knjiga-okvir">
-        <div><img src="${knjiga.fotografija}"></div>
-        <div>Naziv: ${knjiga.naziv}</div>
-        <div>Cijena: ${knjiga.cijena}</div>
+        `<a class="okvir" href="Proizvod.html" onclick="setID(${knjiga.id})"><div class="knjiga-okvir">
+        <div class="knjiga-fotografija"><img src="${knjiga.fotografija}"></div>
+        <div class="knjiga-info">
+        <div class="knjiga-naziv"><h2> ${knjiga.naziv},</h2></div>
+        <div class="knjiga-cijena"><h3> ${knjiga.cijena} KM</h3></div>
+        </div>
       </div></a>`
     )
     .join("");

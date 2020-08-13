@@ -7,20 +7,104 @@ html,
 body {
   width: 100%;
   height: 100%;
+  background-color: #fcf8f8;
 }
 nav {
   width: 100%;
   height: 10%;
-  background-color: aqua;
+  background-color: #ab8f8f;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+.container {
   display: flex;
   justify-content: space-between;
+  margin: 0 15% 0 15%;
 }
+.brand {
+  display: flex;
+  align-items: flex-end;
+}
+.brand a {
+  text-decoration: none;
+  color: black;
+  margin: 18px 0 0 0;
+}
+button {
+  margin: 0 5px 0 5px;
+  width: 120px !important;
+  height: 40px;
+  background: #c4c4c4;
+  border: none;
+  border-radius: 20px;
+  text-align: center;
+  color: #8a0e0e;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: 700;
+  margin: 18px 0 0 0;
+}
+button:focus {
+  outline: none;
+}
+button:hover {
+  background-color: #8a0e0e;
+  color: #c4c4c4;
+  transition: 0.5s;
+}
+#pocetna {
+  margin-right: 15px;
+}
+
 #wrapper,
 #Knjiga {
+  width: 70%;
+  margin: 0 15% 0 15%;
+  padding-top: 20px;
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: 33% 33% 33%;
 }
 .knjiga-okvir {
+  width: 100%;
+  padding-top: 20px;
+}
+.knjiga-fotografija {
+  text-align: center;
+}
+.knjiga-fotografija img {
+  width: 250px;
+  border-radius: 5px;
+  padding: 0 auto 0 auto;
+}
+
+.knjiga-info {
+  width: 250px;
+  margin: 0 auto 0 auto;
+  padding-top: 10px;
+}
+.okvir {
+  text-decoration: none;
+  color: black;
+  transition: 0.5s;
+  border-radius: 10px;
+}
+.okvir:hover {
+  color: #8a0e0e;
+  box-shadow: 0px 1px 3px 0px gray;
+}
+img:hover {
+  opacity: 0.9;
+  transition: 0.5s;
+  z-index: 1;
+}
+footer {
+  background-color: #ab8f8f;
+  text-align: right;
+}
+footer div {
+  margin-right: 15%;
 }
 .slicica-tabela {
   width: 100px;

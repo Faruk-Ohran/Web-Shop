@@ -10,10 +10,18 @@
   </head>
   <body onload="ucitajKosaricu()">
     <nav>
-      <div><a id="IzbornikDugme">☰</a><span>Prodavnica Knjiga</span></div>
-      <div id="Izbornik" style="clear: both;">
-        <a class="IzbornikStavka" href="Pocetna.html">Pocetna</a>
-        <a class="IzbornikStavka" href="Kosarica.html">Kosarica</a>
+      <div class="container">
+        <div class="brand">
+          <a href="Pocetna.html"><h2>PRODAVNICA KNJIGA</h2></a>
+        </div>
+        <div id="Izbornik">
+          <a class="IzbornikStavka" href="Pocetna.html"
+            ><button id="pocetna">POČETNA</button></a
+          >
+          <a class="IzbornikStavka" href="Kosarica.html"
+            ><button>KOŠARICA</button></a
+          >
+        </div>
       </div>
     </nav>
     <table
@@ -62,6 +70,7 @@
 
       <input type="submit" onclick="naruci()" id="dodaj" value="Naruči" />
     </form>
+    <footer><div>© Ohran 2020</div></footer>
     <script src="script.js"></script>
   </body>
 </html>
