@@ -67,6 +67,20 @@ let knjige = [
   },
 ];
 
+let knjigaKosarica = localStorage.getItem("kosarica");
+knjigaKosarica = JSON.parse(knjigaKosarica);
+
+let knjiga = Object.keys(knjigaKosarica).map(function (key) {
+  return knjigaKosarica[key];
+});
+
+if (knjigaKosarica.length != 0) {
+  $("#kosarica-dugme span").append(`${knjiga.length}`);
+  $("#kosarica-dugme span").show();
+} else {
+  $("#kosarica-dugme span").append(0);
+}
+
 function ucitajKnjige() {
   document.getElementById("wrapper").innerHTML = knjige
     .map(
@@ -159,7 +173,10 @@ function ucitajKosaricu() {
     return knjigaKosarica[key];
   });
 
+  let suma = 0;
+
   for (let i = 0; i < knjiga.length; i++) {
+    suma += knjiga[i].cijena;
     $("#tabela-kosarica tbody").append(
       `<tr><td>
         <img class="slicica-tabela" src="${knjiga[i].fotografija}"></img>
@@ -197,6 +214,11 @@ function ucitajKosaricu() {
         </td></tr>`
     );
   }
+  $("#tabela-narudzba tbody").append(
+    `<tr><td id="ukupno"></td><td id="ukupno"></td><td id="ukupno"></td><td >Ukupno: ${suma} KM</td></tr>`
+  );
+  document.getElementById("ukupno-kosarica").innerHTML =
+    "Ukupno: " + suma + " KM";
 }
 
 $.validator.addMethod(

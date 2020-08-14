@@ -148,6 +148,23 @@ footer {
   cursor: pointer;
   font-weight: 700;
 }
+#kosarica-naruci {
+  margin: 0 !important;
+}
+#ukupno-kosarica {
+  margin: 0 30px 0 0;
+  padding-top: 10px;
+  width: 160px !important;
+  height: 40px;
+  background-color: #c4c4c48f;
+  border: none;
+  border-radius: 20px;
+  text-align: center;
+  color: black;
+  text-decoration: none;
+  cursor: default;
+  font-weight: 700;
+}
 .single-book-button:hover {
   background-color: #c4c4c48f;
   color: black;
@@ -263,4 +280,25 @@ td {
 }
 img {
   border-radius: 10px;
+}
+#ukupno {
+  visibility: hidden;
+}
+.kosarica-dugmad {
+  margin: 0 15% 0 15%;
+  display: flex;
+  float: right;
+}
+#kosarica-dugme {
+  position: relative;
+}
+#kosarica-dugme span {
+  background-color: #8a0e0e;
+  color: white;
+  border-radius: 100%;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: -2px;
+  right: -2px;
 }
