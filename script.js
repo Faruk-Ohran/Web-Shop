@@ -3,6 +3,8 @@ let knjige = [
     id: 1,
     fotografija: "images/Ime_ruze.jpg",
     naziv: "Ime ruže",
+    autor: "Umberto Eko",
+    kategorija: "Roman",
     cijena: 15,
     kolicina: 1,
     opis:
@@ -12,6 +14,8 @@ let knjige = [
     id: 2,
     fotografija: "images/Mi_protiv_vas.jpg",
     naziv: "Mi protiv vas",
+    autor: "Fredrik Bakman",
+    kategorija: "Roman",
     cijena: 20,
     kolicina: 1,
     opis:
@@ -21,6 +25,8 @@ let knjige = [
     id: 3,
     fotografija: "images/Zivotinja_srca.jpg",
     naziv: "Životinja srca",
+    autor: "Herta Miler",
+    kategorija: "Drama",
     cijena: 15,
     kolicina: 1,
     opis:
@@ -30,6 +36,8 @@ let knjige = [
     id: 4,
     fotografija: "images/Zivim_tiho.jpg",
     naziv: "Živim tiho",
+    autor: "Fadil Duranović",
+    kategorija: "Poezija",
     cijena: 15,
     kolicina: 1,
     opis:
@@ -39,6 +47,8 @@ let knjige = [
     id: 5,
     fotografija: "images/Casovnicareva_kci.jpg",
     naziv: "Časovničareva kći",
+    autor: "Kejt Morton",
+    kategorija: "Drama",
     cijena: 26,
     kolicina: 1,
     opis:
@@ -48,6 +58,8 @@ let knjige = [
     id: 6,
     fotografija: "images/Tudja_pravila.jpg",
     naziv: "Tuđa pravila",
+    autor: "Džon Irving",
+    kategorija: "Drama",
     cijena: 30,
     kolicina: 1,
     opis:
@@ -62,7 +74,7 @@ function ucitajKnjige() {
         `<a class="okvir" href="Proizvod.html" onclick="setID(${knjiga.id})"><div class="knjiga-okvir">
         <div class="knjiga-fotografija"><img src="${knjiga.fotografija}"></div>
         <div class="knjiga-info">
-        <div class="knjiga-naziv"><h2> ${knjiga.naziv},</h2></div>
+        <div class="knjiga-naziv"><h2> ${knjiga.naziv}</h2></div>
         <div class="knjiga-cijena"><h3> ${knjiga.cijena} KM</h3></div>
         </div>
       </div></a>`
@@ -82,14 +94,17 @@ function vratiKnjigu() {
   document.getElementById("Knjiga").innerHTML = selectedBook
     .map(
       (knjiga) =>
-        `<div class="knjiga-okvir">
-      <div id="fotografija"><img src="${knjiga.fotografija}"></div>
-      <div id="naziv"> ${knjiga.naziv}</div>
+        `<div class="single-book-okvir">
+      <div id="fotografija" class="single-book-photo"><img src="${knjiga.fotografija}"></div>
+      
+      <div class="single-book-info"><div class="single-book-up">
+      <div id="naziv"><h2> ${knjiga.naziv}</h2></div>
+      <div id="autor"><p>${knjiga.autor}, ${knjiga.kategorija}</p></div>
       <div id="opis"> ${knjiga.opis}</div>
-      <label>Cijena:</label>
-      <div id="cijena"> ${knjiga.cijena}</div>
+      </div>
+      <div class="single-book-add">
       <form name="forma"> 
-      <label>Kolicina:</label>
+      <div class="kolicina">Količina: </div>
       <select id="kolicina" name="selektovano" onChange="getNovuCijenu(${knjiga.id},${knjiga.cijena})">
       <option value="1">1</option>
       <option value="2">2</option>
@@ -103,15 +118,18 @@ function vratiKnjigu() {
       <option value="10">10</option>
       </select>
       </form>
-      <a href="Pocetna.html"  onclick="dodajProizvod(${knjiga.id},${knjiga.cijena})"  id="dodaj">Dodaj u kosaricu</a>
-    </div>`
+      <div id="cijena" >Cijena: ${knjiga.cijena} KM</div>
+      <a  href="Pocetna.html"  onclick="dodajProizvod(${knjiga.id},${knjiga.cijena})"  id="dodaj"><button class="single-book-button">Dodaj u košaricu</button></a>
+      </div>
+      </div>
+      </div>`
     )
     .join("");
 }
 
 function getNovuCijenu(ID, CIJENA) {
   CIJENA *= forma.selektovano[forma.selektovano.selectedIndex].value;
-  document.getElementById("cijena").innerHTML = CIJENA;
+  document.getElementById("cijena").innerHTML = "Cijena: " + CIJENA + " KM";
 }
 
 function dodajProizvod(ID, CIJENA) {
@@ -148,8 +166,6 @@ function ucitajKosaricu() {
         </td><td>
         ${knjiga[i].naziv}
         </td><td>
-        ${knjiga[i].cijena}
-        </td><td>
         <form name="formaKosarica"> 
       <select id="kolicinaKosarica${i}" name="selektovanoKosarica" onChange="promijeniCijenu(${i},${knjiga[i].cijena})">
       <option value="1">1</option>
@@ -164,6 +180,8 @@ function ucitajKosaricu() {
       <option value="10">10</option>
       </select>
       </form>
+        </td><td>
+        ${knjiga[i].cijena} KM
         </td><td><a type="button" onclick="obrisiKnjigu(${knjiga[i].id})">Ukloni</a></td></tr>`
     );
     $("#kolicinaKosarica" + i).val(knjiga[i].kolicina);
@@ -173,9 +191,9 @@ function ucitajKosaricu() {
         </td><td>
         ${knjiga[i].naziv}
         </td><td>
-        ${knjiga[i].cijena}
-        </td><td>
         ${knjiga[i].kolicina}
+        </td><td>
+        ${knjiga[i].cijena} KM
         </td></tr>`
     );
   }
@@ -230,9 +248,17 @@ podaciForma.validate({
 });
 
 function naruci() {
-  alert("Narudžba poslana!");
-  localStorage.clear();
-  window.location.replace("Pocetna.html");
+  let knjigaKosarica = localStorage.getItem("kosarica");
+  if (knjigaKosarica === null || knjigaKosarica.length === 2) {
+    alert("Košarica je prazna");
+    window.location.replace("Pocetna.html");
+  } else if (podaciForma.valid() == true) {
+    alert("Narudžba poslana!");
+    localStorage.clear();
+    window.location.replace("Pocetna.html");
+  } else {
+    alert("Molimo Vas da unesete ispravne podatke!");
+  }
 }
 
 function obrisiKnjigu(id) {

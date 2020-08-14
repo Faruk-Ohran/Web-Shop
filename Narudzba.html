@@ -24,52 +24,52 @@
         </div>
       </div>
     </nav>
-    <table
-      id="tabela-narudzba"
-      border="1px"
-      style="width: 100%; table-layout: fixed;"
-    >
-      <thead>
-        <tr class="glavno">
-          <th>Fotografija</th>
-          <th>Naziv</th>
-          <th>Cijena</th>
-          <th>Kolicina</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-    <form id="forma" onsubmit="return false;">
-      <label for="dostavaIme">Ime i prezime</label>
-      <input
-        id="dostavaIme"
-        name="dostavaIme"
-        placeholder="Ime i Prezime"
-      /><br />
+    <div class="wrapper-narudzba">
+      <div class="tabela-narudzba">
+        <table id="tabela-narudzba">
+          <thead>
+            <tr class="glavno">
+              <th>Fotografija</th>
+              <th>Naziv</th>
+              <th>Količina</th>
+              <th>Cijena</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <form id="forma" onsubmit="return false;">
+        <label for="dostavaIme">Ime i prezime</label>
+        <input
+          id="dostavaIme"
+          name="dostavaIme"
+          placeholder="Ime i Prezime"
+        /><br />
 
-      <label for="dostavaAdresa">Adresa</label>
-      <input
-        id="dostavaAdresa"
-        name="dostavaAdresa"
-        placeholder="Adresa"
-      /><br />
+        <label for="dostavaAdresa">Adresa</label>
+        <input
+          id="dostavaAdresa"
+          name="dostavaAdresa"
+          placeholder="Adresa"
+        /><br />
 
-      <label for="dostavaTelefon">Broj telefona</label>
-      <input
-        id="dostavaTelefon"
-        name="dostavaTelefon"
-        placeholder="000 111 222"
-      /><br />
+        <label for="dostavaTelefon">Broj telefona</label>
+        <input
+          id="dostavaTelefon"
+          name="dostavaTelefon"
+          placeholder="000 111 222"
+        /><br />
 
-      <label for="dostavaMail">Mail</label>
-      <input
-        id="dostavaMail"
-        name="dostavaMail"
-        placeholder="email.email@hotmail.com"
-      /><br />
+        <label for="dostavaMail">Mail</label>
+        <input
+          id="dostavaMail"
+          name="dostavaMail"
+          placeholder="email.email@hotmail.com"
+        /><br />
 
-      <input type="submit" onclick="naruci()" id="dodaj" value="Naruči" />
-    </form>
+        <input type="submit" onclick="naruci()" id="dodaj" value="Naruči" />
+      </form>
+    </div>
     <footer><div>© Ohran 2020</div></footer>
     <script src="script.js"></script>
   </body>
