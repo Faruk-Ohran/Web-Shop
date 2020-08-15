@@ -215,7 +215,7 @@ function ucitajKosaricu() {
     );
   }
   $("#tabela-narudzba tbody").append(
-    `<tr><td id="ukupno"></td><td id="ukupno"></td><td id="ukupno"></td><td >Ukupno: ${suma} KM</td></tr>`
+    `<tr><td id="ukupno"></td><td id="ukupno"></td><td id="ukupno"></td><td id="ukupno-kosarica">Ukupno: ${suma} KM</td></tr>`
   );
   document.getElementById("ukupno-kosarica").innerHTML =
     "Ukupno: " + suma + " KM";
@@ -296,4 +296,70 @@ function obrisiKnjigu(id) {
   );
   localStorage.setItem("kosarica", JSON.stringify(odabraneKnjige));
   location.reload();
+}
+
+function prikazi() {
+  let izbornik = document.getElementById("Izbornik");
+  let wrapperContainer = document.getElementById("wrapper-container");
+  let wrapperKosarica = document.getElementById("wrapper-kosarica");
+  let wrapperNarudzba = document.getElementById("wrapper-narudzba");
+  let knjiga = document.getElementById("Knjiga");
+  if (izbornik.style.display == "flex") {
+    izbornik.style.display = "none";
+    let wrapperHeight =
+      $("body").height() - ($("#nav").height() + $("#footer").height());
+    if (wrapperKosarica != null) {
+      wrapperKosarica.style.height = wrapperHeight + "px";
+    }
+    if (wrapperContainer != null) {
+      wrapperContainer.style.height = wrapperHeight + "px";
+    }
+    if (wrapperNarudzba != null) {
+      wrapperNarudzba.style.height = wrapperHeight + "px";
+    }
+    if (knjiga != null) {
+      knjiga.style.height = wrapperHeight + "px";
+    }
+  } else {
+    izbornik.style.display = "flex";
+
+    let wrapperHeight =
+      $("body").height() - ($("#nav").height() + $("#footer").height());
+    if (wrapperKosarica != null) {
+      wrapperKosarica.style.height = wrapperHeight + "px";
+    }
+    if (wrapperContainer != null) {
+      wrapperContainer.style.height = wrapperHeight + "px";
+    }
+    if (wrapperNarudzba != null) {
+      wrapperNarudzba.style.height = wrapperHeight + "px";
+    }
+    if (knjiga != null) {
+      knjiga.style.height = wrapperHeight + "px";
+    }
+  }
+}
+$(document).ready(larg);
+
+$(window).resize(larg);
+
+function larg() {
+  let wrapperKosarica = document.getElementById("wrapper-kosarica");
+  let wrapperNarudzba = document.getElementById("wrapper-narudzba");
+  let wrapperContainer = document.getElementById("wrapper-container");
+  let knjiga = document.getElementById("Knjiga");
+  let wrapperHeight =
+    $("body").height() - ($("#nav").height() + $("#footer").height());
+  if (wrapperKosarica != null) {
+    wrapperKosarica.style.height = wrapperHeight + "px";
+  }
+  if (wrapperContainer != null) {
+    wrapperContainer.style.height = wrapperHeight + "px";
+  }
+  if (wrapperNarudzba != null) {
+    wrapperNarudzba.style.height = wrapperHeight + "px";
+  }
+  if (knjiga != null) {
+    knjiga.style.height = wrapperHeight + "px";
+  }
 }

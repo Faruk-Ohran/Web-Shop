@@ -9,7 +9,7 @@
     <title>Prodavnica knjiga</title>
   </head>
   <body onload="ucitajKnjige()">
-    <nav>
+    <nav id="nav">
       <div class="container">
         <div class="brand">
           <a href="Pocetna.html"><h2>PRODAVNICA KNJIGA</h2></a>
@@ -22,13 +22,13 @@
             ><button id="kosarica-dugme">KOŠARICA<span></span></button
           ></a>
         </div>
+        <a id="IzbornikDugme" type="button" onclick="prikazi()">☰</a>
       </div>
     </nav>
-    <div class="wrapper-container">
+    <div class="wrapper-container" id="wrapper-container">
       <div id="wrapper"></div>
     </div>
-    <footer><div>© Ohran 2020</div></footer>
-
+    <footer id="footer"><div>© Ohran 2020</div></footer>
     <script src="script.js"></script>
   </body>
 </html>
