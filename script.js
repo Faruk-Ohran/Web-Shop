@@ -6,6 +6,7 @@ let knjige = [
     autor: "Umberto Eko",
     kategorija: "Roman",
     cijena: 15,
+    novaCijena: 15,
     kolicina: 1,
     opis:
       "Jedan od temeljnih postmodernističkih romana o fatalnom dejstvu jedne zabranjene knjige smješten je u godinu 1327. Franjevački monasi u bogatoj italijanskoj opatiji.",
@@ -17,6 +18,7 @@ let knjige = [
     autor: "Fredrik Bakman",
     kategorija: "Roman",
     cijena: 20,
+    novaCijena: 20,
     kolicina: 1,
     opis:
       "Ponekad je tako jednostavno potaći ljude da mrze jedni druge da je prosto neshvatljivo kako bilo šta drugo i radimo. Nakon užasnih zbivanja koja su potresla Medvjedgrad.",
@@ -28,6 +30,7 @@ let knjige = [
     autor: "Herta Miler",
     kategorija: "Drama",
     cijena: 15,
+    novaCijena: 15,
     kolicina: 1,
     opis:
       "Dobitnica Nobelove nagrade. Lolino samoubistvo, koje je možda i ubistvo, povezuje četvoro mladih ljudi. Između njih se razvija neraskidivo prijateljstvo.",
@@ -39,6 +42,7 @@ let knjige = [
     autor: "Fadil Duranović",
     kategorija: "Poezija",
     cijena: 15,
+    novaCijena: 15,
     kolicina: 1,
     opis:
       "Fadil Duranović se suočio sa sobom i svijetom, a potom zatočen slikom i međusobnim odnosom, pjesnički osvijestio svoju komunikaciju. ",
@@ -50,6 +54,7 @@ let knjige = [
     autor: "Kejt Morton",
     kategorija: "Drama",
     cijena: 26,
+    novaCijena: 26,
     kolicina: 1,
     opis:
       "Mog pravog imena niko se ne seća. Istinu o tom letu niko ne zna. U leto 1862. grupa mladih umetnika na čelu sa talentovanim Edvardom Redklifom.",
@@ -61,6 +66,7 @@ let knjige = [
     autor: "Džon Irving",
     kategorija: "Drama",
     cijena: 30,
+    novaCijena: 30,
     kolicina: 1,
     opis:
       "Radnja ovog romana odvija se u ruralnim krajevima Nove Engleske u prvoj polovini dvadesetog veka. To je priča o doktoru Vilburu Larču – svecu i ginekologu.",
@@ -184,7 +190,7 @@ function ucitajKosaricu() {
         ${knjiga[i].naziv}
         </td><td>
         <form name="formaKosarica"> 
-      <select id="kolicinaKosarica${i}" name="selektovanoKosarica" onChange="promijeniCijenu(${i},${knjiga[i].cijena})">
+      <select id="kolicinaKosarica${i}" name="selektovanoKosarica" onChange="promijeniCijenu(${knjiga[i].id})">
       <option value="1">1</option>
       <option value="2">2</option>
       <option value="3">3</option>
@@ -197,7 +203,7 @@ function ucitajKosaricu() {
       <option value="10">10</option>
       </select>
       </form>
-        </td><td>
+        </td><td id="nova-cijena">
         ${knjiga[i].cijena} KM
         </td><td><a type="button" onclick="obrisiKnjigu(${knjiga[i].id})">Ukloni</a></td></tr>`
     );
@@ -219,6 +225,32 @@ function ucitajKosaricu() {
   );
   document.getElementById("ukupno-kosarica").innerHTML =
     "Ukupno: " + suma + " KM";
+}
+function promijeniCijenu(id) {
+  let cijena = 0;
+  let kolicina =
+    formaKosarica.selektovanoKosarica[
+      formaKosarica.selektovanoKosarica.selectedIndex
+    ].value;
+
+  let knjigaKosarica = localStorage.getItem("kosarica");
+  knjigaKosarica = JSON.parse(knjigaKosarica);
+
+  const selectedBook = knjige.filter((knjiga) => {
+    if (id === knjiga.id) return knjiga;
+  });
+  cijena = selectedBook[0].novaCijena * kolicina;
+  selectedBook[0].cijena = cijena;
+  selectedBook[0].kolicina = kolicina;
+  document.getElementById("nova-cijena").innerHTML = cijena + " KM";
+  document.getElementById("ukupno-kosarica").innerHTML =
+    "Ukupno: " + cijena + " KM";
+  knjigaKosarica = {
+    ...knjigaKosarica,
+    [selectedBook[0].id]: selectedBook[0],
+  };
+
+  localStorage.setItem("kosarica", JSON.stringify(knjigaKosarica));
 }
 
 $.validator.addMethod(
