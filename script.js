@@ -106,6 +106,7 @@ function setID(id) {
 }
 
 function vratiKnjigu() {
+  let fotografija = document.getElementById("fotografija");
   let id = parseInt(sessionStorage.getItem("id"));
   const selectedBook = knjige.filter((knjiga) => {
     if (id === knjiga.id) return knjiga;
@@ -115,7 +116,7 @@ function vratiKnjigu() {
     .map(
       (knjiga) =>
         `<div class="single-book-okvir">
-      <div id="fotografija" class="single-book-photo"><img src="${knjiga.fotografija}"></div>
+      <div id="fotografija" class="single-book-photo" onclick="prikaziSlider()" onmouseover="viseSlika()" onmouseout="slikaOpacity()"><img id="hover-photo" src="${knjiga.fotografija}"><img id="search-photo" src="/images/search.png"></img><div id="vise-slika">Više slika</div></div>
       
       <div class="single-book-info"><div class="single-book-up">
       <div id="naziv"><h2> ${knjiga.naziv}</h2></div>
@@ -145,6 +146,39 @@ function vratiKnjigu() {
       </div>`
     )
     .join("");
+  document.getElementById("slider").innerHTML = `
+    <div class="slideshow-container">
+ 
+      <div class="mySlides fade">
+        <div class="numbertext">1 / 3</div>
+        <img src="/images/Mi_protiv_vas.jpg" style="width: 100%;" />
+        <div class="text">Caption Text</div>
+      </div>
+
+      <div class="mySlides fade">
+        <div class="numbertext">2 / 3</div>
+        <img src="/images/Casovnicareva_kci.jpg" style="width: 100%;" />
+        <div class="text">Caption Two</div>
+      </div>
+
+      <div class="mySlides fade">
+        <div class="numbertext">3 / 3</div>
+        <img src="/images/Ime_ruze.jpg" style="width: 100%;" />
+        <div class="text">Caption Three</div>
+      </div>
+
+   
+      <a class="prev" id="prev" onclick="plusSlides(-1)">&#10094;</a>
+      <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    </div>
+    <br />
+
+
+    <div style="text-align: center;">
+      <span class="dot" onclick="currentSlide(1)"></span>
+      <span class="dot" onclick="currentSlide(2)"></span>
+      <span class="dot" onclick="currentSlide(3)"></span>
+    </div>`;
 }
 
 function getNovuCijenu(ID, CIJENA) {
@@ -190,7 +224,7 @@ function ucitajKosaricu() {
         ${knjiga[i].naziv}
         </td><td>
         <form name="formaKosarica"> 
-      <select id="kolicinaKosarica${i}" name="selektovanoKosarica" onChange="promijeniCijenu(${knjiga[i].id})">
+      <select id="kolicinaKosarica${knjiga[i].id}" name="selektovanoKosarica" onChange="promijeniCijenu(${knjiga[i].id})">
       <option value="1">1</option>
       <option value="2">2</option>
       <option value="3">3</option>
@@ -203,11 +237,11 @@ function ucitajKosaricu() {
       <option value="10">10</option>
       </select>
       </form>
-        </td><td id="nova-cijena">
+        </td><td id="nova-cijena${knjiga[i].id}">
         ${knjiga[i].cijena} KM
         </td><td><a type="button" onclick="obrisiKnjigu(${knjiga[i].id})">Ukloni</a></td></tr>`
     );
-    $("#kolicinaKosarica" + i).val(knjiga[i].kolicina);
+    $("#kolicinaKosarica" + knjiga[i].id).val(knjiga[i].kolicina);
     $("#tabela-narudzba tbody").append(
       `<tr><td>
         <img class="slicica-tabela" src="${knjiga[i].fotografija}"></img>
@@ -228,10 +262,8 @@ function ucitajKosaricu() {
 }
 function promijeniCijenu(id) {
   let cijena = 0;
-  let kolicina =
-    formaKosarica.selektovanoKosarica[
-      formaKosarica.selektovanoKosarica.selectedIndex
-    ].value;
+  let kolicina = $("#kolicinaKosarica" + id).val();
+  let suma = 0;
 
   let knjigaKosarica = localStorage.getItem("kosarica");
   knjigaKosarica = JSON.parse(knjigaKosarica);
@@ -242,14 +274,21 @@ function promijeniCijenu(id) {
   cijena = selectedBook[0].novaCijena * kolicina;
   selectedBook[0].cijena = cijena;
   selectedBook[0].kolicina = kolicina;
-  document.getElementById("nova-cijena").innerHTML = cijena + " KM";
-  document.getElementById("ukupno-kosarica").innerHTML =
-    "Ukupno: " + cijena + " KM";
+  document.getElementById("nova-cijena" + selectedBook[0].id).innerHTML =
+    cijena + " KM";
+
   knjigaKosarica = {
     ...knjigaKosarica,
     [selectedBook[0].id]: selectedBook[0],
   };
 
+  var key;
+
+  for (key in knjigaKosarica) {
+    if (knjigaKosarica.hasOwnProperty(key)) suma += knjigaKosarica[key].cijena;
+  }
+  document.getElementById("ukupno-kosarica").innerHTML =
+    "Ukupno: " + suma + " KM";
   localStorage.setItem("kosarica", JSON.stringify(knjigaKosarica));
 }
 
@@ -395,3 +434,73 @@ function larg() {
     knjiga.style.height = wrapperHeight + "px";
   }
 }
+
+function sakrijSlider() {
+  let sliderPlace = document.getElementById("slider-place");
+  let slider = document.getElementById("slider");
+  let fotografija = document.getElementById("fotografija");
+  let viseSlika = document.getElementById("vise-slika");
+
+  sliderPlace.style.visibility = "hidden";
+  slider.style.visibility = "hidden";
+  fotografija.style.position = "relative";
+  viseSlika.style.visibility = "visible";
+}
+var slideIndex = 1;
+function prikaziSlider() {
+  let sliderPlace = document.getElementById("slider-place");
+  let slider = document.getElementById("slider");
+  let fotografija = document.getElementById("fotografija");
+  let viseSlika = document.getElementById("vise-slika");
+
+  sliderPlace.style.visibility = "visible";
+  slider.style.visibility = "visible";
+  fotografija.style.position = "static";
+  viseSlika.style.visibility = "hidden";
+
+  showSlides(slideIndex);
+}
+
+// Next/previous controls
+function plusSlides(n) {
+  showSlides((slideIndex += n));
+}
+
+// Thumbnail image controls
+function currentSlide(n) {
+  showSlides((slideIndex = n));
+}
+function showSlides(n) {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {
+    slideIndex = 1;
+  }
+  if (n < 1) {
+    slideIndex = slides.length;
+  }
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex - 1].style.display = "block";
+  dots[slideIndex - 1].className += " active";
+}
+
+viseSlika = () => {
+  let fotografija = document.getElementById("fotografija");
+  let search = document.getElementById("search-photo");
+  fotografija.style.opacity = 0.5;
+  search.style.visibility = "visible";
+  search.style.opacity = 1;
+};
+slikaOpacity = () => {
+  let fotografija = document.getElementById("fotografija");
+  let search = document.getElementById("search-photo");
+
+  fotografija.style.opacity = 1;
+  search.style.visibility = "hidden";
+};
