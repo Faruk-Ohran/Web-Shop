@@ -8,13 +8,13 @@ html,
 body {
   width: 100%;
   height: 100%;
-  background-color: #fcf8f8;
+  background-color: #def2f1;
   overflow: hidden;
 }
 nav {
   width: 100%;
   height: 10%;
-  background-color: #ab8f8f;
+  background-color: #3aafa9;
   position: sticky;
   top: 0;
   left: 0;
@@ -34,26 +34,62 @@ nav {
   color: black;
   margin: 18px 0 0 0;
 }
-button {
+
+button,
+.single-book-button,
+#kosarica-naruci,
+#zavrsiNarudzbu,
+#obrisi-knjigu {
   margin: 18px 5px 0 5px;
   width: 120px !important;
   height: 40px;
-  background-color: #c4c4c4;
+  background-color: #17252a;
   border: none;
-  border-radius: 20px;
+  border-radius: 10px;
   text-align: center;
-  color: black;
+  color: #def2f1;
   text-decoration: none;
   cursor: pointer;
   font-weight: 700;
   font-size: 16px;
+  outline: none;
+}
+#obrisi-knjigu {
+  background-color: rgba(255, 0, 0, 0.8);
+  margin-bottom: 20px;
+}
+#obrisi-knjigu:hover {
+  background-color: red;
+  color: #feffff;
+  transition: 0.5s;
 }
 button:focus {
   outline: none;
 }
-button:hover {
-  background-color: #8a0e0e;
-  color: #c4c4c4;
+
+#forma {
+  position: relative;
+}
+input {
+  height: 25px;
+  margin-bottom: 5px;
+  padding-left: 5px;
+  background-color: #feffff;
+  border: none;
+  border-bottom: 1px solid #3aafa9;
+  border-radius: 10px;
+  color: #17252a;
+  outline-color: red;
+}
+label {
+  padding-left: 5px;
+}
+.single-book-button:hover,
+button:hover,
+#kosarica-naruci:hover,
+#zavrsiNarudzbu:hover {
+  background-color: #2b7a78;
+  color: #feffff;
   transition: 0.5s;
 }
 #pocetna {
@@ -61,6 +97,7 @@ button:hover {
 }
 .wrapper-container {
   width: 100%;
+
   overflow-y: scroll;
 }
 #wrapper {
@@ -71,7 +108,7 @@ button:hover {
   grid-template-columns: 33% 33% 33%;
 }
 .knjiga-okvir {
-  width: 100%;
+  min-width: 250px;
   padding: 20px 0 20px 0;
 }
 .knjiga-fotografija {
@@ -79,32 +116,119 @@ button:hover {
 }
 .knjiga-fotografija img {
   width: 250px;
-  border-radius: 5px;
-  padding: 0 auto 0 auto;
+  padding: 20px;
+  border-radius: 30px;
 }
 
 .knjiga-info {
   width: 250px;
   margin: 0 auto 0 auto;
-  padding-top: 10px;
+  padding-left: 20px;
 }
 .okvir {
+  min-width: 250px;
   text-decoration: none;
-  color: black;
-  transition: 0.5s;
+  color: #17252a;
+  margin: 10px;
   border-radius: 10px;
+  background: #feffff;
+  transition: 0.1s;
 }
 .okvir:hover {
-  color: #8a0e0e;
-  box-shadow: 0px 1px 3px 0px gray;
+  animation-name: oboji;
+  animation-duration: 0.1s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+  box-shadow: 0px 1px 3px 0px #17252a;
+  color: #2b7a78;
 }
-img:hover {
-  opacity: 0.9;
-  transition: 0.5s;
-  z-index: 1;
+
+@keyframes oboji {
+  0% {
+    background: linear-gradient(
+      0deg,
+      rgba(254, 255, 255, 1) 0%,
+      rgba(222, 242, 241, 1) 55%,
+      rgba(58, 175, 169, 0.10157566444546573) 100%
+    );
+  }
+  10% {
+    background: linear-gradient(
+      0deg,
+      rgba(254, 255, 255, 1) 0%,
+      rgba(222, 242, 241, 1) 60%,
+      rgba(58, 175, 169, 0.10157566444546573) 100%
+    );
+  }
+  20% {
+    background: linear-gradient(
+      0deg,
+      rgba(254, 255, 255, 1) 0%,
+      rgba(222, 242, 241, 1) 65%,
+      rgba(58, 175, 169, 0.10157566444546573) 100%
+    );
+  }
+  30% {
+    background: linear-gradient(
+      0deg,
+      rgba(254, 255, 255, 1) 0%,
+      rgba(222, 242, 241, 1) 70%,
+      rgba(58, 175, 169, 0.10157566444546573) 100%
+    );
+  }
+  50% {
+    background: linear-gradient(
+      0deg,
+      rgba(254, 255, 255, 1) 0%,
+      rgba(222, 242, 241, 1) 75%,
+      rgba(58, 175, 169, 0.10157566444546573) 100%
+    );
+  }
+  60% {
+    background: linear-gradient(
+      0deg,
+      rgba(254, 255, 255, 1) 0%,
+      rgba(222, 242, 241, 1) 80%,
+      rgba(58, 175, 169, 0.10157566444546573) 100%
+    );
+  }
+  70% {
+    background: linear-gradient(
+      0deg,
+      rgba(254, 255, 255, 1) 0%,
+      rgba(222, 242, 241, 1) 85%,
+      rgba(58, 175, 169, 0.10157566444546573) 100%
+    );
+  }
+  80% {
+    background: linear-gradient(
+      0deg,
+      rgba(254, 255, 255, 1) 0%,
+      rgba(222, 242, 241, 1) 90%,
+      rgba(58, 175, 169, 0.10157566444546573) 100%
+    );
+  }
+  90% {
+    background: linear-gradient(
+      0deg,
+      rgba(254, 255, 255, 1) 0%,
+      rgba(222, 242, 241, 1) 95%,
+      rgba(58, 175, 169, 0.10157566444546573) 100%
+    );
+  }
+  100% {
+    background: linear-gradient(
+      0deg,
+      rgba(254, 255, 255, 1) 0%,
+      rgba(222, 242, 241, 1) 100%,
+      rgba(58, 175, 169, 0.10157566444546573) 100%
+    );
+  }
 }
+
 footer {
-  background-color: #ab8f8f;
+  background-color: #3aafa9;
+  color: #def2f1;
   text-align: center;
   color: rgba(0, 0, 0, 0.5);
   position: absolute;
@@ -122,60 +246,29 @@ footer {
   border-radius: 10px;
   box-shadow: 0px 1px 3px 0px gray;
   display: flex;
+  background: linear-gradient(
+    0deg,
+    rgba(254, 255, 255, 1) 0%,
+    rgba(222, 242, 241, 1) 80%,
+    rgba(58, 175, 169, 0.10157566444546573) 100%
+  );
 }
 
 .single-book-photo img:hover {
   opacity: 1;
 }
 
-.single-book-info {
-  padding-left: 20px;
-}
 .single-book-info #opis {
   text-align: justify;
 }
-.single-book-button,
+.single-book-info {
+  padding: 20px 0 0 20px;
+}
+
 #kosarica-naruci {
-  margin: 18px 5px 0 5px;
-  width: 120px !important;
-  height: 40px;
-  background-color: #8a0e0e;
-  border: none;
-  border-radius: 20px;
-  border-top-right-radius: 0;
-  text-align: center;
-  color: white;
-  text-decoration: none;
-  cursor: pointer;
-  font-weight: 700;
+  margin-bottom: 20px;
 }
-#kosarica-naruci {
-  margin: 0 !important;
-}
-#ukupno-kosarica {
-  margin: 0 30px 0 0;
-  padding-top: 10px;
-  width: 160px !important;
-  height: 40px;
-  background-color: #c4c4c48f;
-  border: none;
-  border-radius: 20px;
-  text-align: center;
-  color: black;
-  text-decoration: none;
-  cursor: default;
-  font-weight: 700;
-}
-.single-book-button:hover {
-  background-color: #c4c4c48f;
-  color: black;
-  transition: 0.5s;
-}
-#kosarica-naruci:hover {
-  background-color: #c4c4c48f;
-  color: black;
-  transition: 0.5s;
-}
+
 .single-book-up {
   height: 50%;
 }
@@ -187,43 +280,68 @@ footer {
   height: 50%;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
-.single-book-okvir #cijena,
-.single-book-okvir form .kolicina {
-  background-color: #c4c4c48f;
-  color: black;
-  margin: 18px 5px 0 5px;
-  width: 120px;
-  height: 40px;
-  border: none;
-  border-radius: 20px;
-  text-align: center;
-  text-decoration: none;
-  font-weight: 700;
-  padding-top: 10px;
-  outline: none;
-}
 .single-book-okvir form {
   display: flex;
   height: 40px;
   margin: 18px 5px 0 5px;
 }
 
-.single-book-okvir form .kolicina {
-  background-color: #c4c4c48f;
-  color: black;
-  margin: 0;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-}
-.single-book-okvir form select {
-  background-color: #c4c4c48f;
+.single-book-okvir form .kolicina,
+select,
+#cijena,
+th,
+td {
+  width: 120px;
+  height: 40px;
+  padding-top: 15px;
+  background: linear-gradient(
+    0deg,
+    rgba(222, 242, 241, 1) 0%,
+    rgba(237, 248, 248, 1) 50%,
+    rgba(254, 255, 255, 1) 100%
+  );
   border: none;
-  outline: none;
+  border-bottom: 1px solid #3aafa9;
+  border-radius: 10px;
+  text-align: center;
+  color: #17252a;
+  text-decoration: none;
+  cursor: default;
   font-weight: 700;
   font-size: 16px;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 0 1em;
+}
+td,
+th {
+  border: none !important;
+  border-bottom: 2px solid #3aafa9 !important;
+  border-radius: 10px;
+}
+
+.single-book-okvir form .kolicina {
+  width: 75px;
+}
+.single-book-okvir #cijena {
+  margin: 18px 5px 0 5px;
+}
+
+select,
+option {
+  width: 45px;
+  outline: none;
+  cursor: pointer;
+  margin-left: 5px;
+  padding: 8px 0 0 5px;
+}
+.forma-kosarica select {
+  padding-top: 0;
 }
 .single-book-okvir form select option {
   font-size: 16px;
@@ -260,10 +378,7 @@ td {
   text-align: center;
   border-radius: 2px;
 }
-#kosarica-naruci {
-  float: right;
-  margin: 0 15% 20px 0;
-}
+
 .wrapper-narudzba #forma {
   margin: 0 15% 0 15%;
   padding-top: 20px;
@@ -282,13 +397,12 @@ td {
 }
 .error {
   color: red;
+  padding-bottom: 2px;
 }
 img {
-  border-radius: 10px;
+  border-radius: 20px;
 }
-#ukupno {
-  visibility: hidden;
-}
+
 .kosarica-dugmad {
   margin: 0 15% 0 15%;
   display: flex;
@@ -298,8 +412,8 @@ img {
   position: relative;
 }
 #kosarica-dugme span {
-  background-color: #8a0e0e;
-  color: white;
+  background-color: #feffff;
+  color: #17252a;
   border-radius: 100%;
   width: 20px;
   height: 20px;
@@ -310,6 +424,55 @@ img {
 #IzbornikDugme {
   display: none;
 }
+#fotografija {
+  position: relative;
+  cursor: pointer;
+}
+
+#vise-slika {
+  position: absolute;
+  right: 0;
+  left: 0px;
+  bottom: 0px;
+  background-color: #17252a;
+  color: #ffffff;
+  font-weight: bold;
+  height: 50px;
+  text-align: center;
+  padding-top: 15px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+#search-photo {
+  width: 250px;
+  height: 250px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -125px;
+  margin-left: -125px;
+  visibility: hidden;
+}
+.slider-place {
+  background-color: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  visibility: hidden;
+}
+.slider {
+  width: 350px;
+  height: 400px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -200px;
+  margin-left: -175px;
+  visibility: hidden;
+}
+
 @media only screen and (max-width: 1180px) {
   img {
     width: 300px;
@@ -351,8 +514,15 @@ img {
     margin: 0 7% 0 7%;
     grid-template-columns: 50% 50%;
   }
+
   img {
     width: 200px;
+  }
+  #search-photo {
+    width: 150px;
+    height: 150px;
+    margin-top: -75px;
+    margin-left: -75px;
   }
 }
 @media only screen and (max-width: 800px) {
@@ -361,7 +531,7 @@ img {
     flex-direction: column;
   }
   .single-book-info {
-    padding-left: 0;
+    padding-left: 0 !important;
   }
   .single-book-photo {
     margin-left: auto;
@@ -403,7 +573,6 @@ img {
   #Izbornik {
     height: 60px;
     display: none;
-    padding-top: 10px;
     margin-left: auto;
   }
 
@@ -412,7 +581,8 @@ img {
     text-align: center;
     position: absolute;
     font-size: 30px;
-    background-color: #c4c4c4;
+    background-color: #17252a;
+    color: #def2f1;
     top: 3px;
     right: 1%;
     cursor: pointer;
@@ -443,9 +613,7 @@ img {
     grid-area: c;
     text-align: left;
   }
-  #opis {
-    text-align: left !important;
-  }
+
   .brand a h2 {
     font-size: 18px;
   }
@@ -461,15 +629,42 @@ img {
     font-size: 11px;
   }
 
-  #ukupno-kosarica {
-    width: 140px !important;
-    margin-right: 10px;
-  }
   .tabela-narudzba {
     height: 30%;
   }
+  .slider {
+    width: 200px;
+    height: 220px;
+    margin-top: -110px;
+    margin-left: -100px;
+  }
+  button {
+    width: 110px !important;
+  }
+  #forma-select,
+  #cijena,
+  .single-book-button {
+    width: 110px !important;
+  }
+  #cijena,
+  .single-book-button {
+    float: right;
+  }
 }
-
+@media only screen and (max-width: 275px) {
+  .single-book-add {
+    display: grid;
+    grid-template-areas:
+      "a "
+      "b "
+      "c ";
+    grid-template-columns: 100%;
+  }
+  #cijena,
+  .single-book-button {
+    float: none;
+  }
+}
 /* Slideshow container */
 .slideshow-container {
   max-width: 1000px;
@@ -547,20 +742,6 @@ img {
 .dot:hover {
   background-color: #717171;
 }
-.slider-place {
-  background-color: rgba(0, 0, 0, 0.7);
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  visibility: hidden;
-}
-.slider {
-  position: fixed;
-  margin: 10% 40% 0 40%;
-  visibility: hidden;
-}
 
 /* Fading animation */
 .fade {
@@ -588,28 +769,22 @@ img {
   }
 }
 
-#fotografija {
-  position: relative;
-  cursor: pointer;
+html {
+  --scrollbarBG: #def2f1;
+  --thumbBG: #3aafa9;
 }
-
-#vise-slika {
-  position: absolute;
-  right: 0;
-  left: 0px;
-  bottom: 0px;
-  background-color: #8a0e0e;
-  color: #ffffff;
-  font-weight: bold;
-  height: 50px;
-  text-align: center;
-  padding-top: 15px;
+::-webkit-scrollbar {
+  width: 11px;
 }
-#search-photo {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  visibility: hidden;
+body {
+  scrollbar-width: thin;
+  scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+}
+::-webkit-scrollbar-track {
+  background: var(--scrollbarBG);
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--thumbBG);
+  border-radius: 6px;
+  border: 3px solid var(--scrollbarBG);
 }
