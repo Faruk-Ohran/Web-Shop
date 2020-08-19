@@ -1,17 +1,17 @@
 let knjige = [
   {
     id: 1,
-    fotografija: "images/Ime_ruze.jpg",
+    fotografija: "images/Vjencanje.jpg",
     fotografija2: "images/slika1.jpg",
     fotografija3: "images/slika2.jpg",
-    naziv: "Ime ruže",
-    autor: "Umberto Eko",
+    naziv: "Vjenčanje",
+    autor: "Julie Garwood",
     kategorija: "Roman",
-    cijena: 15,
-    novaCijena: 15,
+    cijena: 22,
+    novaCijena: 22,
     kolicina: 1,
     opis:
-      "Jedan od temeljnih postmodernističkih romana o fatalnom dejstvu jedne zabranjene knjige smješten je u godinu 1327. Franjevački monasi u bogatoj italijanskoj opatiji.",
+      "Roman Vjenčanje nezaboravna je ljubavna priča puna strasti i uzbudljivih intriga iz pera nenadmašne Julie Garwood. Putujući iz Engleske u Škotsku kako bi se udala.",
   },
   {
     id: 2,
@@ -83,6 +83,48 @@ let knjige = [
     opis:
       "Radnja ovog romana odvija se u ruralnim krajevima Nove Engleske u prvoj polovini dvadesetog veka. To je priča o doktoru Vilburu Larču – svecu i ginekologu.",
   },
+  {
+    id: 7,
+    fotografija: "images/Garavi_sokak.jpg",
+    fotografija2: "images/slika1.jpg",
+    fotografija3: "images/slika2.jpg",
+    naziv: "Garavi sokak",
+    autor: "Miroslav Antić",
+    kategorija: "Poezija",
+    cijena: 16,
+    novaCijena: 16,
+    kolicina: 1,
+    opis:
+      "Veselo cigansko vašarište sa nekoliko suza i kapi kiše Miroslav Antić posvećuje ovu knjigu mladom Ciganinu Miletu Dileji, koga su fašisti jedne noći odveli.",
+  },
+  {
+    id: 8,
+    fotografija: "images/Ime_ruze.jpg",
+    fotografija2: "images/slika1.jpg",
+    fotografija3: "images/slika2.jpg",
+    naziv: "Ime ruže",
+    autor: "Umberto Eko",
+    kategorija: "Roman",
+    cijena: 15,
+    novaCijena: 15,
+    kolicina: 1,
+    opis:
+      "Jedan od temeljnih postmodernističkih romana o fatalnom dejstvu jedne zabranjene knjige smješten je u godinu 1327. Franjevački monasi u bogatoj italijanskoj opatiji.",
+  },
+  {
+    id: 9,
+    fotografija: "images/Medvjedgrad.jpg",
+    fotografija2: "images/slika1.jpg",
+    fotografija3: "images/slika2.jpg",
+    naziv: "Medvjedgrad",
+    autor: "Fredrik Bakman",
+    kategorija: "Roman",
+    cijena: 20,
+    novaCijena: 20,
+    kolicina: 1,
+    opis:
+      "Roman Medvjedgrad prvi je dio autorove duologije o problemima što ih donosi život u maloj zajednici. Problemima što ih se lako može preslikati i na šire i veće zajednice.",
+  },
 ];
 
 $(document).ready(larg);
@@ -111,12 +153,10 @@ function larg() {
   }
 }
 
-// Next/previous controls
 function plusSlides(n) {
   showSlides((slideIndex += n));
 }
 
-// Thumbnail image controls
 function currentSlide(n) {
   showSlides((slideIndex = n));
 }
@@ -156,10 +196,6 @@ slikaOpacity = () => {
   viseSlika.style.opacity = 1;
   search.style.visibility = "hidden";
 };
-prikaziSelect = () => {
-  console.log("otvori");
-  // $("#forma-select select").click();
-};
 
 function sakrijSlider() {
   let sliderPlace = document.getElementById("slider-place");
@@ -174,7 +210,7 @@ function sakrijSlider() {
   fotografija.style.position = "relative";
   viseSlika.style.visibility = "visible";
 }
-var slideIndex = 1;
+let slideIndex = 1;
 function prikaziSlider(id) {
   let sliderPlace = document.getElementById("slider-place");
   let slider = document.getElementById("slider");
@@ -210,7 +246,7 @@ function prikaziSlider(id) {
 
   <div class="mySlides fade">
     <div class="numbertext">3 / 3</div>
-    <img src="${knjiga.fotografija3}" />
+    <img src="${knjiga.fotografija3}" style="width: 100%;" />
   </div>
 
 
@@ -231,6 +267,9 @@ function prikaziSlider(id) {
 }
 
 let knjigaKosarica = localStorage.getItem("kosarica");
+if (knjigaKosarica === null || knjigaKosarica.length === 0) {
+  localStorage.setItem("kosarica", JSON.stringify([]));
+}
 knjigaKosarica = JSON.parse(knjigaKosarica);
 if (knjigaKosarica === null || knjigaKosarica.length === 0) {
   $("#kosarica-dugme span").hide();
@@ -276,7 +315,6 @@ function setID(id) {
 }
 
 function vratiKnjigu() {
-  let fotografija = document.getElementById("fotografija");
   let id = parseInt(sessionStorage.getItem("id"));
   const selectedBook = knjige.filter((knjiga) => {
     if (id === knjiga.id) return knjiga;
@@ -286,7 +324,7 @@ function vratiKnjigu() {
     .map(
       (knjiga) =>
         `<div class="single-book-okvir">
-      <div id="fotografija" class="single-book-photo" onclick="prikaziSlider(${knjiga.id})" onmouseover="viseSlika()" onmouseout="slikaOpacity()"><img id="hover-photo" src="${knjiga.fotografija}"><img id="search-photo" src="/images/search.png"></img><div id="vise-slika">Više slika</div></div>
+      <div id="fotografija" class="single-book-photo" onclick="prikaziSlider(${knjiga.id})" onmouseover="viseSlika()" onmouseout="slikaOpacity()"><img id="hover-photo" src="${knjiga.fotografija}"><img id="search-photo" src="images/search.png"></img><div id="vise-slika">Više slika</div></div>
       
       <div class="single-book-info"><div class="single-book-up">
       <div id="naziv"><h2> ${knjiga.naziv}</h2></div>
@@ -296,7 +334,7 @@ function vratiKnjigu() {
       <div class="single-book-add">
       <form name="forma" id="forma-select"> 
       <div class="kolicina" onclick="prikaziSelect()">Količina: </div>
-      <select id="kolicina"  name="selektovano" onChange="getNovuCijenu(${knjiga.id},${knjiga.cijena})">
+      <select id="kolicina"  name="selektovano" onChange="getNovuCijenu(${knjiga.cijena})">
       <option value="1">1</option>
       <option value="2">2</option>
       <option value="3">3</option>
@@ -318,28 +356,34 @@ function vratiKnjigu() {
     .join("");
 }
 
-function getNovuCijenu(ID, CIJENA) {
-  CIJENA *= forma.selektovano[forma.selektovano.selectedIndex].value;
-  document.getElementById("cijena").innerHTML = "Cijena: " + CIJENA + " KM";
+function getNovuCijenu(cijena) {
+  cijena *= forma.selektovano[forma.selektovano.selectedIndex].value;
+  document.getElementById("cijena").innerHTML = "Cijena: " + cijena + " KM";
 }
 
-function dodajProizvod(ID, CIJENA) {
+function dodajProizvod(id, cijena) {
   let knjigaKosarica = localStorage.getItem("kosarica");
   knjigaKosarica = JSON.parse(knjigaKosarica);
 
-  const selectedBook = knjige.filter((knjiga) => {
-    if (ID === knjiga.id) return knjiga;
+  let odabraneKnjige = Object.keys(knjigaKosarica).map(function (key) {
+    return knjigaKosarica[key];
+  });
+  odabraneKnjige = odabraneKnjige.filter(function (obj) {
+    return obj.id !== id;
   });
 
-  knjigaKosarica = {
-    ...knjigaKosarica,
-    [selectedBook[0].id]: selectedBook[0],
-  };
+  const selectedBook = knjige.filter((knjiga) => {
+    if (id === knjiga.id) return knjiga;
+  });
 
-  CIJENA *= forma.selektovano[forma.selektovano.selectedIndex].value;
-  selectedBook[0].cijena = CIJENA;
+  cijena *= forma.selektovano[forma.selektovano.selectedIndex].value;
+  selectedBook[0].cijena = cijena;
   selectedBook[0].kolicina =
     forma.selektovano[forma.selektovano.selectedIndex].value;
+
+  odabraneKnjige.push(selectedBook[0]);
+  knjigaKosarica = odabraneKnjige;
+
   localStorage.setItem("kosarica", JSON.stringify(knjigaKosarica));
 }
 
@@ -408,6 +452,13 @@ function promijeniCijenu(id) {
   let knjigaKosarica = localStorage.getItem("kosarica");
   knjigaKosarica = JSON.parse(knjigaKosarica);
 
+  let odabraneKnjige = Object.keys(knjigaKosarica).map(function (key) {
+    return knjigaKosarica[key];
+  });
+  odabraneKnjige = odabraneKnjige.filter(function (obj) {
+    return obj.id !== id;
+  });
+
   const selectedBook = knjige.filter((knjiga) => {
     if (id === knjiga.id) return knjiga;
   });
@@ -417,10 +468,16 @@ function promijeniCijenu(id) {
   document.getElementById("nova-cijena" + selectedBook[0].id).innerHTML =
     cijena + " KM";
 
-  knjigaKosarica = {
-    ...knjigaKosarica,
-    [selectedBook[0].id]: selectedBook[0],
-  };
+  let index = 0;
+  for (let i = 0; i < knjigaKosarica.length; i++) {
+    if (knjigaKosarica[i].id === id) {
+      index = knjigaKosarica.indexOf(knjigaKosarica[i]);
+    }
+  }
+
+  odabraneKnjige.splice(index, 0, selectedBook[0]);
+
+  knjigaKosarica = odabraneKnjige;
 
   var key;
 
@@ -429,6 +486,7 @@ function promijeniCijenu(id) {
   }
   document.getElementById("ukupno-kosarica").innerHTML =
     "Ukupno: " + suma + " KM";
+
   localStorage.setItem("kosarica", JSON.stringify(knjigaKosarica));
 }
 
@@ -493,10 +551,10 @@ function obrisiKnjigu(id) {
     return knjigaKosarica[key];
   });
 
-  odabraneKnjige.splice(
-    odabraneKnjige.findIndex((v) => v.id === id),
-    1
-  );
+  odabraneKnjige = odabraneKnjige.filter(function (obj) {
+    return obj.id !== id;
+  });
+
   localStorage.setItem("kosarica", JSON.stringify(odabraneKnjige));
   location.reload();
 }
